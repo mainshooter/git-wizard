@@ -14,7 +14,7 @@ InputAndCode = {
   },
   "commitComment" : {
     "code" : "commitCommand",
-    "defaultText" : "git commit -a -m"
+    "defaultText" : "git commit -a -m "
   }
 }
 
@@ -67,43 +67,7 @@ function processText(element) {
     // We have spaces
     select("#" + codeID).innerHTML = defaultText + placeQuotesStartAndEnd(inputText);
   }
-  console.log(codeID);
-  console.log(defaultText);
 }
-
-(function() {
-  StepOne = {
-    folderLocation: function() {
-      let inputResult = select("#folder").value;
-      let checkResult = checkForSpace(inputResult);
-      if (checkResult == false) {
-        // We don't have a space
-        select("#zoekFolderCommando").innerHTML = "cd " + inputResult;
-      }
-
-      else if (checkResult == true) {
-        // We have a space, so we place quotes
-        select("#zoekFolderCommando").innerHTML = "cd " + placeQuotesStartAndEnd(inputResult);
-      }
-
-    },
-    cloneURL: function() {
-      let inputResult = select("#cloneUrl").value;
-      let checkResult = checkForSpace(inputResult);
-
-      if (checkResult == false) {
-        // No spacces
-        select("#cloneCommand").innerHTML = "git clone " + inputResult
-      }
-
-      else if (checkResult == true) {
-        // we ahev spaces
-        select("#cloneCommand").innerHTML = "git clone " + placeQuotesStartAndEnd(inputResult);
-      }
-
-    }
-  }
-})();
 
 /**
  * checks if a string has a space
