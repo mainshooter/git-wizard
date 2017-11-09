@@ -51,6 +51,22 @@ function StepsEventListners() {
 })();
 
 /**
+ * checks if a string has a space
+ * @param  {[type]} string [the string we want to check]
+ * @return {[type]}        [If there is a space we return true]
+ */
+function checkForSpace(string) {
+  let stringArray = string.split('');
+  let result = false;
+  for (var i = 0; i < stringArray.length; i++) {
+    if (stringArray[i] == ' ') {
+      return(true);
+    }
+  }
+  return(result);
+}
+
+/**
  * Goes a page back
  */
 function previousStep() {
