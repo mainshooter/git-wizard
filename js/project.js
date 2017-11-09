@@ -17,7 +17,7 @@ InputAndCode = {
     "codeID" : "commitCommand",
     "defaultText" : "git commit -a -m "
   }
-}
+};
 
 /**
  * Runs the startup
@@ -26,11 +26,10 @@ InputAndCode = {
   currentStep = 0;
   maxSteps = 4;
 
-  select("#step").innerHTML = Ajax.get_withCallback('steps/step0.html').responseText;
-
   Listner.add('#previousStep', 'click', previousStep);
   Listner.add('#nextStep', 'click', nextStep);
-  disableButtons();
+
+  goTo();
 })();
 
 /**
