@@ -5,15 +5,15 @@ var InputAndCode;
 
 InputAndCode = {
   "folder" : {
-    "code" : "zoekFolderCommando",
+    "codeID" : "zoekFolderCommando",
     "defaultText" : "cd ",
   },
   "cloneUrl" : {
-    "code" : "cloneCommand",
+    "codeID" : "cloneCommand",
     "defaultText" : "git clone ",
   },
   "commitComment" : {
-    "code" : "commitCommand",
+    "codeID" : "commitCommand",
     "defaultText" : "git commit -a -m "
   }
 }
@@ -54,7 +54,7 @@ function StepsEventListners() {
 function processText(element) {
   let inputText = element.value;
 
-  let codeID = InputAndCode[element.id]['code'];
+  let codeID = InputAndCode[element.id]['codeID'];
   let defaultText = InputAndCode[element.id]['defaultText'];
 
   let checkForSpaces = checkForSpace(inputText);
@@ -151,6 +151,10 @@ function disableButtons() {
   }
 }
 
+/**
+ * Copys the text from the codes
+ * @param  {[type]} element [description]
+ */
 function copyCommand(element) {
   select("#tmpInput").value = element.innerHTML;
   let textInput = select("#tmpInput");
