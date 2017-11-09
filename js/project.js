@@ -1,5 +1,14 @@
 var StepOne;
 
+var InputAndCode;
+// Is a object that contains the id of a imput form and the ID of the code tag
+
+InputAndCode = {
+  "folder" : "zoekFolderCommando",
+  "cloneUrl" : "cloneCommand",
+  "commitComment" : "commitCommand",
+}
+
 let currentStep = 0;
 let maxSteps = 4;
 
