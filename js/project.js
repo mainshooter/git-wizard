@@ -106,15 +106,14 @@ function previousStep() {
   if (currentStep > 0) {
     // We can go back
     currentStep--;
-    select("#step").innerHTML = Ajax.get_withCallback('steps/step' + currentStep + '.html').responseText;
-    console.log("Back");
-    StepsEventListners();
-    disableButtons();
+    goTo();
   }
+}
 
-  else {
-    // We can't go back
-  }
+function goTo() {
+  select("#step").innerHTML = Ajax.get_withCallback('steps/step' + currentStep + '.html').responseText;
+  StepsEventListners();
+  disableButtons();
 }
 
 /**
@@ -125,13 +124,7 @@ function nextStep() {
     // We can go to the next step
     console.log("Next");
     currentStep++;
-    select("#step").innerHTML = Ajax.get_withCallback('steps/step' + currentStep + '.html').responseText;
-    StepsEventListners();
-    disableButtons();
-  }
-
-  else {
-    // We can't go back
+    goTo();
   }
 }
 
