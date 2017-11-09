@@ -26,7 +26,11 @@ function StepsEventListners() {
       break;
     case 1:
       Listner.add('#folder', 'keyup', function() { StepOne.folderLocation();});
-      Listner.add("#cloneUrl", 'keyup', function(){StepOne.cloneURL();})
+      Listner.add("#cloneUrl", 'keyup', function(){StepOne.cloneURL();});
+      let code = selectAll("code");
+      for (var i = 0; i < code.length; i++) {
+        code[i].addEventListener('click', function(){copyCommand(this);});
+      }
       break;
     case 2:
 
@@ -154,4 +158,13 @@ function disableButtons() {
   if (currentStep == maxSteps) {
     select("#nextStep").setAttribute("disabled", "disabled");
   }
+}
+
+function copyCommand(element) {
+  select("#tmpInput").value = element.innerHTML;
+  let textInput = select("#tmpInput");
+  textInput.focus();
+  textInput.select();
+  document.execCommand("Copy");
+  alert("Copied the text: " + textInput.value);
 }
