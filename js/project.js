@@ -11,14 +11,15 @@ let maxSteps = 4;
 
   Listner.add('#previousStep', 'click', previousStep);
   Listner.add('#nextStep', 'click', nextStep);
+  disableButtons();
 })();
 
 /**
  * Controlls the eventlistners we have for each step
  */
 function StepsEventListners() {
-  Listner.remove('#folder', 'keyup', function() { StepOne.folderLocation();});
-  Listner.remove("#cloneUrl", 'keyup', function(){StepOne.cloneURL();})
+  // Listner.remove('#folder', 'keyup', function() { StepOne.folderLocation();});
+  // Listner.remove("#cloneUrl", 'keyup', function(){StepOne.cloneURL();})
   switch (currentStep) {
     case 0:
 
@@ -56,7 +57,19 @@ function StepsEventListners() {
 
     },
     cloneURL: function() {
-      select("#cloneCommand").innerHTML = "git clone " + select("#cloneUrl").value;
+      let inputResult = select("#cloneUrl").value;
+      let checkResult = checkForSpace(inputResult);
+
+      if (checkResult == false) {
+        // No spacces
+        select("#cloneCommand").innerHTML = "git clone " + inputResult
+      }
+
+      else if (checkResult == true) {
+        // we ahev spaces
+        select("#cloneCommand").innerHTML = "git clone " + placeQuotesStartAndEnd(inputResult);
+      }
+
     }
   }
 })();
@@ -101,6 +114,7 @@ function previousStep() {
     select("#step").innerHTML = Ajax.get_withCallback('steps/step' + currentStep + '.html').responseText;
     console.log("Back");
     StepsEventListners();
+    disableButtons();
   }
 
   else {
@@ -118,9 +132,26 @@ function nextStep() {
     currentStep++;
     select("#step").innerHTML = Ajax.get_withCallback('steps/step' + currentStep + '.html').responseText;
     StepsEventListners();
+    disableButtons();
   }
 
   else {
     // We can't go back
+  }
+}
+
+/**
+ * checks if we are in the last step or if we are at 0 If we are, we disable the button
+ */
+function disableButtons() {
+  select("#previousStep").removeAttribute("disabled");
+  select("#nextStep").removeAttribute("disabled");
+  // We first enable them so we can later enable them
+  if (currentStep == 0) {
+    select("#previousStep").setAttribute("disabled", "disabled");
+  }
+
+  if (currentStep == maxSteps) {
+    select("#nextStep").setAttribute("disabled", "disabled");
   }
 }
