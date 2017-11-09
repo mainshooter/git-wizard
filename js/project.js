@@ -13,6 +13,9 @@ let maxSteps = 4;
   Listner.add('#nextStep', 'click', nextStep);
 })();
 
+/**
+ * Controlls the eventlistners we have for each step
+ */
 function StepsEventListners() {
   Listner.remove('#folder', 'keyup', function() { StepOne.folderLocation();});
   Listner.remove("#cloneUrl", 'keyup', function(){StepOne.cloneURL();})
@@ -47,7 +50,9 @@ function StepsEventListners() {
   }
 })();
 
-
+/**
+ * Goes a page back
+ */
 function previousStep() {
   if (currentStep > 0) {
     // We can go back
@@ -62,6 +67,9 @@ function previousStep() {
   }
 }
 
+/**
+ * Goes a page forward
+ */
 function nextStep() {
   if (currentStep < maxSteps) {
     // We can go to the next step
