@@ -1,7 +1,8 @@
-var StepOne;
+let currentStep;
+let maxSteps;
 
 var InputAndCode;
-// Is a object that contains the id of a imput form and the ID of the code tag
+// Is a object that contains the id of a imput form and the ID of the code tag and the default text
 
 InputAndCode = {
   "folder" : {
@@ -18,13 +19,13 @@ InputAndCode = {
   }
 }
 
-let currentStep = 0;
-let maxSteps = 4;
-
 /**
  * Runs the startup
  */
 (function() {
+  currentStep = 0;
+  maxSteps = 4;
+
   select("#step").innerHTML = Ajax.get_withCallback('steps/step0.html').responseText;
 
   Listner.add('#previousStep', 'click', previousStep);
