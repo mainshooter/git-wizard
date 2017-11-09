@@ -4,9 +4,18 @@ var InputAndCode;
 // Is a object that contains the id of a imput form and the ID of the code tag
 
 InputAndCode = {
-  "folder" : "zoekFolderCommando",
-  "cloneUrl" : "cloneCommand",
-  "commitComment" : "commitCommand",
+  "folder" : {
+    "code" : "zoekFolderCommando",
+    "defaultText" : "cd ",
+  },
+  "cloneUrl" : {
+    "code" : "cloneCommand",
+    "defaultText" : "git clone ",
+  },
+  "commitComment" : {
+    "code" : "commitCommand",
+    "defaultText" : "git commit -a -m"
+  }
 }
 
 let currentStep = 0;
@@ -27,30 +36,39 @@ let maxSteps = 4;
  * Controlls the eventlistners we have for each step
  */
 function StepsEventListners() {
-  // Listner.remove('#folder', 'keyup', function() { StepOne.folderLocation();});
-  // Listner.remove("#cloneUrl", 'keyup', function(){StepOne.cloneURL();})
-  switch (currentStep) {
-    case 0:
-
-      break;
-    case 1:
-      Listner.add('#folder', 'keyup', function() { StepOne.folderLocation();});
-      Listner.add("#cloneUrl", 'keyup', function(){StepOne.cloneURL();});
       let code = selectAll("code");
       for (var i = 0; i < code.length; i++) {
         code[i].addEventListener('click', function(){copyCommand(this);});
       }
-      break;
-    case 2:
 
-      break;
-    case 3:
+      let inputs = selectAll("input");
+      for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('keyup', function(){processText(this);});
+      }
+}
+/**
+ * proceses the text from the input forms
+ * @param  {[type]} element [description]
+ * @return {[type]}         [description]
+ */
+function processText(element) {
+  let inputText = element.value;
 
-      break;
-    case 4:
+  let codeID = InputAndCode[element.id]['code'];
+  let defaultText = InputAndCode[element.id]['defaultText'];
 
-      break;
+  let checkForSpaces = checkForSpace(inputText);
+  if (checkForSpaces == false) {
+    // No spaces
+    select("#" + codeID).innerHTML = defaultText + inputText;
   }
+
+  else if (checkForSpaces == true) {
+    // We have spaces
+    select("#" + codeID).innerHTML = defaultText + placeQuotesStartAndEnd(inputText);
+  }
+  console.log(codeID);
+  console.log(defaultText);
 }
 
 (function() {
