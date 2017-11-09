@@ -1,0 +1,22 @@
+<div class="step" id="step2" data-step="2">
+    <h2>Stap 2: Commit je wijzigingen</h2>
+    <p>Werk lokaal aan je project. Commit als je wijzigingen wilt vastleggen en wilt dat
+    ze worden meegenomen bij de eerstvolgende "push" naar de server.</p>
+
+    <p>Check eerst met <span class="command">git status</span> welke wijzigingen er zijn.</p>
+
+    <pre><code data-copy>git status</code></pre>
+
+    <p>Als er rode wijzigingen tussen zitten (verwijderde of nieuwe bestanden), dan moet
+    je eerst deze toevoegen voordat je commit.</p>
+
+    <pre><code data-copy>git add *</code></pre>
+
+    <p>Nu kun je alles committen.</p>
+    <div>
+        <label for="commitComment">Commentaar bij de commit:</label>
+        <input type="text" id="commitComment" value="some comment">
+    </div>
+
+    <pre><code id="commitCommand" data-copy>git commit -a -m "some comment"</code></pre>
+</div>

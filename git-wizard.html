@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <title>Git Wizard Tool</title>
+    <link rel="stylesheet" type="text/css" href="git-wizard.css">
+</head>
+<body>
+   <div class="container">
+        <h1>Git Wizard Tool</h1>
+
+        <div class="steps">
+            <div class="step" id="step0" data-step="0">
+                <h2>Stap 0: Nieuwe repository aanmaken</h2>
+                <p>Ga naar de website van Github en maak een repository.</p>
+            </div>
+
+            <div class="step" id="step1" data-step="1">
+                <h2>Stap 1: Maak een "working copy" (clone)</h2>
+                <p>Open de Github Shell en zoek de juiste folder op je computer waar je de 
+                "working copy" wilt hebben.</p>            
+                <div>
+                    <label for="folder">Folder op je computer:</label>
+                    <input type="text" id="folder" value="C:\xampp\htdocs\myproject">
+                </div>
+
+                <pre><code id="zoekFolderCommando" data-copy>cd C:\xampp\htdocs\myproject</code></pre>
+
+                <p>Maak een "working copy" op je eigen computer. Voer hieronder de URL in van de 
+                repository op de server. Deze kun je vinden op de Github site.</p>
+                <div>
+                    <label for="cloneUrl">Clone URL:</label>
+                    <input type="text" id="cloneUrl" value="https://github.com/myusername/myproject.git">
+                </div>
+
+                <pre><code id="cloneCommand" data-copy>git clone https://github.com/myusername/myproject.git</code></pre>
+            </div>
+
+            <div class="step" id="step2" data-step="2">
+                <h2>Stap 2: Commit je wijzigingen</h2>
+                <p>Werk lokaal aan je project. Commit als je wijzigingen wilt vastleggen en wilt dat 
+                ze worden meegenomen bij de eerstvolgende "push" naar de server.</p>
+                
+                <p>Check eerst met <span class="command">git status</span> welke wijzigingen er zijn.</p>
+                
+                <pre><code data-copy>git status</code></pre>
+                
+                <p>Als er rode wijzigingen tussen zitten (verwijderde of nieuwe bestanden), dan moet
+                je eerst deze toevoegen voordat je commit.</p>
+                
+                <pre><code data-copy>git add *</code></pre>
+
+                <p>Nu kun je alles committen.</p>
+                <div>
+                    <label for="commitComment">Commentaar bij de commit:</label>
+                    <input type="text" id="commitComment" value="some comment">
+                </div>
+
+                <pre><code id="commitCommand" data-copy>git commit -a -m "some comment"</code></pre>
+            </div>
+
+            <div class="step" id="step3" data-step="3">
+                <h2>Stap 3: Check voor updates</h2>
+                <p>Voordat je je commits naar de server stuurt, moet je eerst kijken of er
+                ondertussen geen wijzigingen zijn geweest op de server. Update dus eerst
+                eventuele wijzigingen van de server naar je "working copy".</p> 
+                
+                <pre><code data-copy>git pull</code></pre>
+                
+                <p>Het kan zijn dat er conflicten optreden tussen de wijzigingen die jij hebt
+                aangebracht en wijzigingen die van de server komen. Deze conflicten moeten
+                eerst worden opgelost voordat je verder gaat.</p>
+            </div>
+
+            <div class="step" id="step4" data-step="4">
+                <h2>Stap 4: Push naar online repository</h2>
+                <p>De laatste stap is dat je alle wijzigingen naar de online repository 
+                stuurt op de server.</p> 
+                
+                <pre><code data-copy>git push</code></pre>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="previousStep" data-load-previous>&lt;&lt; Vorige stap</button>
+            <button id="nextStep" data-load-next>Volgende stap &gt;&gt;</button>
+        </div>
+    </div>
+
+</body>
+</html>
