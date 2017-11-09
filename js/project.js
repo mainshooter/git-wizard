@@ -42,7 +42,18 @@ function StepsEventListners() {
 (function() {
   StepOne = {
     folderLocation: function() {
-      select("#zoekFolderCommando").innerHTML = "cd " + select("#folder").value;
+      let inputResult = select("#folder").value;
+      let checkResult = checkForSpace(inputResult);
+      if (checkResult == false) {
+        // We don't have a space
+        select("#zoekFolderCommando").innerHTML = "cd " + inputResult;
+      }
+
+      else if (checkResult == true) {
+        // We have a space, so we place quotes
+        select("#zoekFolderCommando").innerHTML = "cd " + placeQuotesStartAndEnd(inputResult);
+      }
+
     },
     cloneURL: function() {
       select("#cloneCommand").innerHTML = "git clone " + select("#cloneUrl").value;
@@ -64,6 +75,20 @@ function checkForSpace(string) {
     }
   }
   return(result);
+}
+
+/**
+ * Places quotes around a string
+ * @param  {[string]} string [The string we want to add the quotes]
+ * @return {[string]}        [The string with the quotes]
+ */
+function placeQuotesStartAndEnd(string) {
+  let stringArray = string.split('');
+  stringArray.unshift('"');
+  stringArray.push('"');
+  let stringResult = stringArray.join('');
+
+  return(stringResult);
 }
 
 /**
